@@ -1,10 +1,10 @@
 # Stock-Simulation
 Built for Google Sheets. Set of functions to run a basic simulation of a market (not representative of an actual stock market). 
 
-
 Directions:
-Run Initialize() once to set up the spreadsheet.
-Run the DailyStocks() function after to run the algorithm. 
+Copy the .txt files into seperate functions for Google Sheets.
+1. Run Initialize() once to set up the spreadsheet.
+2. Run the DailyStocks() function after to run the algorithm. You can also set a timer on the function to run automatically.
 
 How it works:
 Values fluctuate on a risk-based system: 
