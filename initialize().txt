@@ -1,0 +1,72 @@
+function intialize() 
+{
+  // Run this function before running the dailystocks function.
+  // This will initialize the spreadsheet.
+  // Look through to make sure the values are correct.
+  
+  // get current sheet info ~ Don't touch
+  var sheet = SpreadsheetApp.getActiveSheet()
+  var datarange = sheet.getDataRange()
+
+  // Set the base stock values
+  var HR_value = 100000;
+  var MR_value = 50000;
+  var LR_value = 10000;
+  
+  
+  // Set the base variance valeus
+  var HR_variance = 2500;
+  var MR_variance = 1000;
+  var LR_variance = 250;
+  
+  
+  // Initialize titles.
+  sheet.getRange(3,1).setValue("Name");
+  sheet.getRange(4,1).setValue("High Risk");
+  sheet.getRange(5,1).setValue("Medium Risk");
+  sheet.getRange(6,1).setValue("Low Risk");
+  
+  sheet.getRange(3,2).setValue("Base Stock Value");
+  sheet.getRange(3,3).setValue("Base Variance Value");
+  
+  
+  sheet.getRange(3,4).setValue("Current Stock Value");
+  sheet.getRange(3,5).setValue("Current Variance Value");
+  
+  
+  sheet.getRange(11,2).setValue("High Risk");
+  sheet.getRange(11,3).setValue("Medium Risk");
+  sheet.getRange(11,4).setValue("Low Risk");
+  sheet.getRange(11,1).setValue("Date");
+  
+  sheet.getRange(8,1).setValue("Previous Random Variable");
+  sheet.getRange(8,2).setValue("Current Random Variable");
+  sheet.getRange(8,3).setValue("Streak");
+
+  
+  
+  // Initialize values.
+  sheet.getRange(4,2).setValue(HR_value);
+  sheet.getRange(5,2).setValue(MR_value);
+  sheet.getRange(6,2).setValue(LR_value);
+  sheet.getRange(4,3).setValue(HR_variance);
+  sheet.getRange(5,3).setValue(MR_variance);
+  sheet.getRange(6,3).setValue(LR_variance);
+  
+  sheet.getRange(4,4).setValue(HR_value);
+  sheet.getRange(5,4).setValue(MR_value);
+  sheet.getRange(6,4).setValue(LR_value);
+  sheet.getRange(4,5).setValue(HR_variance);
+  sheet.getRange(5,5).setValue(MR_variance);
+  sheet.getRange(6,5).setValue(LR_variance);
+  
+  sheet.getRange(12,1).setValue(new Date());
+  sheet.getRange(12,2).setValue(HR_value);
+  sheet.getRange(12,3).setValue(MR_value);
+  sheet.getRange(12,4).setValue(LR_value);
+
+  sheet.getRange(9,1).setValue(0);
+  sheet.getRange(9,2).setValue(0);
+  sheet.getRange(9,3).setValue(0);
+  
+}

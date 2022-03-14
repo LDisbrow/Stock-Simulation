@@ -1,0 +1,110 @@
+function dailystocks() {
+  // WARNING: Run the initialize() function before this!!
+  // Remember to set a trigger
+  
+  
+  // get current sheet info
+  var sheet = SpreadsheetApp.getActiveSheet()
+  var datarange = sheet.getDataRange()
+  var numRows = datarange.getNumRows()
+  
+  
+  // set values
+  var currRand = Math.round(Math.random());        // current random value
+  var prevRand = sheet.getRange(9, 1).getValue();  // previous random value
+  var streak = sheet.getRange(9, 3).getValue();    // streak of same random values
+  var sign;                                        // positive or negative sign
+
+  // increment the streak
+  if(currRand == prevRand)
+  {
+    streak = streak + 1;   // increment the streak if the same value is received
+  }
+  else
+  {
+    streak = 1;            // reset the streak if the value is different
+  } 
+  
+  
+  // decide whether the value is negative or positive
+  if(currRand == 0)
+  {
+    sign = -1;              // set the value to negative if the value is 0
+  }
+  else
+  {
+    sign = 1;               // set the value to positive if the value is 0
+  }
+  
+  // initialize multipliers
+  var HRmult = 1;
+  var MRmult = 1;
+  var LRmult = 1;
+  
+  // base variance values
+  var HRbase = sheet.getRange(4, 3).getValue();
+  var MRbase = sheet.getRange(5, 3).getValue();
+  var LRbase = sheet.getRange(6, 3).getValue();
+
+  
+  // change multipliers based on current streak
+  if( streak >= 4) // Same value 4 or more times
+  {
+    HRmult = 8;
+    MRmult = 3;
+    LRmult = 1;
+  }
+  if( streak == 3) // Same value 3 times
+  {
+    HRmult = 4;
+    MRmult = 3;
+    LRmult = 1;
+  }
+  if( streak == 2) // Same value 2 times
+  {
+    HRmult = 2;
+    MRmult = 1;
+    LRmult = 1;
+  }
+  if( streak == 1)
+  {
+    HRmult = 1;
+    MRmult = 1;
+    LRmult = 1;
+  }
+  
+  // change rate based on current streak
+  var HR = HRbase * HRmult * sign;
+  var MR = MRbase * MRmult * sign;
+  var LR = LRbase * LRmult * sign;
+  
+  // change the current variance value
+  sheet.getRange(4, 5).setValue(HR);
+  sheet.getRange(5, 5).setValue(MR);
+  sheet.getRange(6, 5).setValue(LR);
+  
+  
+  // change current value of stonk
+  sheet.getRange(4, 4).setValue(sheet.getRange(4, 4).getValue()+HR);
+  sheet.getRange(5, 4).setValue(sheet.getRange(5, 4).getValue()+MR);
+  sheet.getRange(6, 4).setValue(sheet.getRange(6, 4).getValue()+LR);
+  
+  
+  // update current random
+  sheet.getRange(9, 2).setValue(currRand);
+  
+  // update previous random
+  sheet.getRange(9, 1).setValue(prevRand);
+  
+  // update streak
+  sheet.getRange(9, 3).setValue(streak);
+  
+  
+  // store data
+  sheet.getRange(numRows + 1, 1).setValue(new Date());
+  sheet.getRange(numRows + 1, 2).setValue(sheet.getRange(4, 4).getValue());
+  sheet.getRange(numRows + 1, 3).setValue(sheet.getRange(5, 4).getValue());
+  sheet.getRange(numRows + 1, 4).setValue(sheet.getRange(6, 4).getValue());
+  
+  
+}
